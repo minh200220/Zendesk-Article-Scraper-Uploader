@@ -52,10 +52,33 @@ if [ "$RUN_ON_STARTUP" = "true" ]; then
 fi
 
 echo ""
+echo "🚀 Starting Flask web server..."
+# Start Flask server in background
+PORT="${PORT:-8000}"
+/usr/local/bin/python /app/app.py > /dev/null 2>&1 &
+FLASK_PID=$!
+
+# Wait a moment for Flask to start
+sleep 2
+
+# Check if Flask started successfully
+if kill -0 $FLASK_PID 2>/dev/null; then
+    echo "✅ Flask server started on port $PORT (PID: $FLASK_PID)"
+    echo "   Access web UI at: http://localhost:$PORT"
+else
+    echo "⚠️  Flask server failed to start"
+fi
+
+echo ""
 echo "🚀 Starting cron daemon..."
 echo "   Logs will be written to: $LOG_FILE"
-echo "   To view logs: docker exec <container> tail -f $LOG_FILE"
-echo "   To run manually: docker exec <container> python /app/main.py"
+echo "   Web UI: http://localhost:$PORT"
+echo "   API Endpoints:"
+echo "     GET  /         - Web UI for viewing logs"
+echo "     GET  /logs     - Plain text logs (supports ?lines=N)"
+echo "     GET  /logs/raw - Download raw log file"
+echo "     GET  /health   - Health check"
+echo "     POST /run      - Trigger manual scraper run"
 echo "=================================================="
 
 # Start cron in foreground

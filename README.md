@@ -2,6 +2,8 @@
 
 Scrapes support articles from Zendesk Help Center using cursor-based pagination and uploads them to OpenAI Vector Store.
 
+**Demo logs:** https://zendesk-article-scraper-uploader.onrender.com/
+
 ![OpenAI Vector Store Result](AIScreenshot.png)
 
 ## Features
