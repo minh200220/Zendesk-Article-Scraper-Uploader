@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  optibot:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: optibot
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      - TZ=${TZ:-UTC}
+      - CRON_SCHEDULE=${CRON_SCHEDULE:-0 2 * * *}
+      - RUN_ON_STARTUP=${RUN_ON_STARTUP:-true}
+      - LOG_FILE=/app/logs/optibot.log
+    volumes:
+      # Persist articles directory
+      - ./articles:/app/articles
+      # Persist state files
+      - ./scraper_state.json:/app/scraper_state.json
+      - ./uploader_state.json:/app/uploader_state.json
+      # Persist logs
+      - ./logs:/app/logs
+    # No ports needed - this is a background cron job

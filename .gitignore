@@ -1,0 +1,20 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+.env
+
+# Virtual environments
+.venv
+
+# Data and state files
+articles/
+scraper_state.json
+uploader_state.json
+
+# Logs
+logs/
+*.log

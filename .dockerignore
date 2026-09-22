@@ -1,0 +1,33 @@
+# Git
+.git
+.gitignore
+
+# Python
+__pycache__/
+*.py[oc]
+.venv
+*.egg-info
+
+# Data files (will be mounted as volumes)
+articles/
+scraper_state.json
+uploader_state.json
+logs/
+*.log
+
+# Documentation
+README.md
+CLAUDE.md
+
+# Environment
+.env
+.env.example
+
+# Docker
+docker-compose.yml
+Dockerfile
+.dockerignore
+
+# Samples
+api_response_sample.json
+read.txt
