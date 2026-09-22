@@ -17,6 +17,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY scraper.py .
 COPY uploader.py .
 COPY main.py .
+COPY app.py .
 COPY entrypoint.sh .
 
 # Make entrypoint executable
@@ -27,6 +28,9 @@ RUN mkdir -p /app/articles /app/state /app/logs
 
 # Set timezone to UTC
 ENV TZ=UTC
+
+# Expose port for web server
+EXPOSE 8000
 
 # Run entrypoint script
 ENTRYPOINT ["/app/entrypoint.sh"]
