@@ -130,10 +130,13 @@ class ArticleUploader:
                     purpose='assistants'
                 )
 
-            # Add file to vector store
+            # Add file to vector store with chunking strategy
             vector_file = self.client.vector_stores.files.create(
                 vector_store_id=self.vector_store_id,
-                file_id=file_response.id
+                file_id=file_response.id,
+                chunking_strategy={
+                    "type": "auto"
+                }
             )
 
             return True, {

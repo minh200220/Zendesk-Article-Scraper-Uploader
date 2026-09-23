@@ -111,3 +111,21 @@ docker exec optibot python /app/main.py
 - Cursor resets automatically
 - Next run starts a fresh scan from the beginning
 
+### Vector Store Chunking Strategy
+
+The uploader uses OpenAI's **`auto` chunking strategy** for optimal retrieval performance:
+
+**Strategy Details:**
+- Automatically chunks articles at ~800 tokens per chunk
+- 400 token overlap between chunks for context continuity
+- Respects semantic boundaries (paragraphs, headings, sections)
+
+**Why `auto` for markdown articles:**
+- ✅ Preserves markdown structure (frontmatter, headings, content flow)
+- ✅ Maintains context across chunk boundaries with overlap
+- ✅ Optimized for Q&A and retrieval tasks
+- ✅ No manual parameter tuning required
+- ✅ Better semantic understanding compared to fixed-size chunks
+
+This ensures high-quality embeddings and accurate retrieval when querying the vector store.
+
